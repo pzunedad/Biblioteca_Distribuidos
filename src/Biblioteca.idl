@@ -1,7 +1,6 @@
 // Biblioteca.idl
 
 module Biblioteca {
-
     // Define una estructura para un libro
     struct Libro {
         string titulo;
@@ -13,7 +12,7 @@ module Biblioteca {
 
     // Define la interfaz para el sistema de gestión de la biblioteca
     interface GestionBiblioteca {
-        // Hay que definir un tipo para poder mostrar la lista de libros
+        // Define un tipo para secuencias de Libros
         typedef sequence<Libro> ListaLibros;
 
         // Busca un libro por título y devuelve los detalles del libro
@@ -27,5 +26,16 @@ module Biblioteca {
 
         // Mostrar todos los libros
         ListaLibros mostrarLibros();
+
+        // Nuevas operaciones
+        string obtenerAutor(in string titulo);
+        ListaLibros buscarPorAutor(in string autor);
+        ListaLibros obtenerLibrosNoDisponibles();
+        string verDetallesLibro(in string ISBN);
+
+        // Operaciones adicionales de gestión
+        boolean anadirLibro(in Libro libro);
+        boolean eliminarLibro(in string ISBN);
+        boolean actualizarLibro(in Libro libro);
     };
 };
