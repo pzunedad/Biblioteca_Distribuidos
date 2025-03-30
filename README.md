@@ -56,6 +56,10 @@ El cliente de la biblioteca ofrece las siguientes funcionalidades a través de u
 - **Solicitar Préstamo:** Posibilita pedir el préstamo de un libro utilizando su ISBN.
 - **Devolver Libro:** Facilita la devolución de un libro prestado.
 - **Mostrar Libros Disponibles:** Muestra todos los libros disponibles para préstamo en la biblioteca.
+- **Mostrar Autor:**  Permite obtener un autor por su libro.
+- **Buscar Libro por Autor** Permite obtener los datos de un libro por el nombre de un autor.
+- **Mostrar Libros No Disponibles** Muestra todos los libros no disponibles.
+- **Ver Detalles Libro** Permite obtener los detalles del libro ingresando su ISBN
 
 Cada opción es accesible a través de un menú al iniciar el cliente.
 
