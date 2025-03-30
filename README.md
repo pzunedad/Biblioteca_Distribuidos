@@ -68,4 +68,88 @@ El diagrama UML muestra como la interfaz GestionBiblioteca gestiona operaciones 
 mientras que GestionBibliotecaImpl maneja la lógica del servidor y ClienteBiblioteca se encarga de las interacciones 
 del usuario.
 
-![Diagrama UML](UMLdiagram.png)
+## Diagrama UML
+
+```mermaid
+classDiagram
+    class Libro {
+        - titulo: String
+        - autor: String
+        - ISBN: String
+        - estaDisponible: boolean
+        - cantidad: int
+        + Libro(String, String, String, boolean, int)
+        + getTitulo(): String
+        + getAutor(): String
+        + getISBN(): String
+        + isDisponible(): boolean
+        + getCantidad(): int
+        + setDisponible(boolean): void
+        + setCantidad(int): void
+    }
+
+    class GestionBiblioteca {
+        <<interface>>
+        + buscarLibro(String): Libro
+        + prestarLibro(String): boolean
+        + devolverLibro(String): boolean
+        + mostrarLibros(): Libro[]
+        + obtenerAutor(String): String
+        + buscarPorAutor(String): Libro[]
+        + obtenerLibrosNoDisponibles(): Libro[]
+        + verDetallesLibro(String): String
+        + añadirLibro(Libro): boolean
+        + eliminarLibro(String): boolean
+        + actualizarLibro(Libro): boolean
+    }
+
+    class GestionBibliotecaImpl {
+        - libros: Map~String, Libro~
+        - orb: ORB
+        + GestionBibliotecaImpl(ORB)
+        + setORB(ORB): void
+        + buscarLibro(String): Libro
+        + prestarLibro(String): boolean
+        + devolverLibro(String): boolean
+        + mostrarLibros(): Libro[]
+        + obtenerAutor(String): String
+        + buscarPorAutor(String): Libro[]
+        + obtenerLibrosNoDisponibles(): Libro[]
+        + verDetallesLibro(String): String
+        + añadirLibro(Libro): boolean
+        + eliminarLibro(String): boolean
+        + actualizarLibro(Libro): boolean
+    }
+
+    class ServidorBiblioteca {
+        + main(String[]): void
+    }
+
+    class ClienteBiblioteca {
+        + main(String[]): void
+        - buscarLibro(GestionBiblioteca, Scanner): void
+        - prestarLibro(GestionBiblioteca, Scanner): void
+        - devolverLibro(GestionBiblioteca, Scanner): void
+        - mostrarLibros(GestionBiblioteca): void
+        - mostrarAutor(GestionBiblioteca, Scanner): void
+        - buscarPorAutor(GestionBiblioteca, Scanner): void
+        - mostrarNoDisponibles(GestionBiblioteca): void
+        - verDetallesLibro(GestionBiblioteca, Scanner): void
+    }
+
+    class ORB {
+        <<external>>
+    }
+
+    class Scanner {
+        <<external>>
+    }
+
+    GestionBibliotecaImpl ..|> GestionBiblioteca: implements
+    GestionBibliotecaImpl --> Libro: manages
+    ServidorBiblioteca --> GestionBibliotecaImpl: creates
+    ServidorBiblioteca --> ORB: uses
+    ClienteBiblioteca --> GestionBiblioteca: uses
+    ClienteBiblioteca --> Scanner: uses
+    ClienteBiblioteca --> ORB: uses
+```
